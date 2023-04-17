@@ -31,15 +31,17 @@ const Questionnaire = () => {
 
   const handleNext = () => {
     // validate mandatory questions and fields before moving to the next question
+  
+    //check 
     const currentAnswer = answers[currentQuestionIndex];
     if (currentQuestion.required && !currentAnswer) {
       setErrors([...errors, `${currentQuestion.text} is required.`]);
       return;
     }
-    if (currentQuestion.type === 'checkbox' && currentQuestion.required && currentAnswer.length === 0) {
-      setErrors([...errors, `${currentQuestion.text} is required.`]);
-      return;
-    }
+    // if (currentQuestion.type === 'checkbox' && currentQuestion.required && currentAnswer.length === 0) {
+    //   setErrors([...errors, `${currentQuestion.text} is required.`]);
+    //   return;
+    // }
     setCurrentQuestionIndex(currentQuestionIndex + 1);
     setErrors([]);
   };
@@ -50,6 +52,7 @@ const Questionnaire = () => {
       setErrors(errors.filter((error) => error !== `${currentQuestion.text} is required.`));
     }
     setAnswers({ ...answers, [questionIndex]: answer });
+    
   };
   
   const handleSubmit = () => {
@@ -96,6 +99,7 @@ console.log("questions",questions[currentQuestionIndex]);
       <br/>
       {currentQuestion.type === 'text' && (
         <TextField
+          value={answers[0]}
           onChange={(e) => handleAnswerChange(currentQuestionIndex, e.target.value)}
           variant="outlined"
         />
